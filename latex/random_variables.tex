@@ -322,10 +322,10 @@ Load gau.dat in python and plot the empirical CDF of $X$ using the samples in ga
     \end{lstlisting}
 Properties of this CDF are:
 \begin{itemize}
-    \item $\Phi(x)=P(Z \leq x)= \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{x}\exp\left\{-\frac{u^2}{2}\right\} du$
-    \item $\lim \limits_{x\rightarrow \infty} \Phi(x)=1, \hspace{5pt} \lim \limits_{x\rightarrow -\infty} \Phi(x)=0$
-    \item  $\Phi(0)=\frac{1}{2}$
-    \item  $\Phi(-x)=1-\Phi(x)$
+    \item $F_{Z}(x)=P(Z \leq x)= 1-Q(x) $
+    \item $\lim \limits_{x\rightarrow \infty} F_{Z}(x)=1, \hspace{5pt} \lim \limits_{x\rightarrow -\infty} F_{Z}(x)=0$
+    \item  $F_{Z}(0)=\frac{1}{2}$
+    \item  $F_{Z}(-x)=1-F_{Z}(x)$
     \end{itemize}
 \begin{figure}[h]
 \centering
@@ -447,5 +447,28 @@ Use the below command to run the plot code
     \nonumber
  \end{align}
 
+\end{enumerate}
+\section{Triangular Distribution}
+\begin{enumerate}[label=\thesection.\arabic*
+,ref=\thesection.\theenumi]
+
+\item Generate $T=U_1+U_2$
+\solution Download and run the following programs:
+\begin{lstlisting}
+    wget
+\end{lstlisting}
+Use the below command to run the program
+\begin{lstlisting}
+    gcc tri.c -lm
+    ./a.out
+\end{lstlisting}
+\item Find the CDF of T:
+\solution We know that $P_T(x)=P(U_1+U_2=x)$
+\begin{align}
+    &\implies P_T(x)=\int_{-\infty}^{\infty}P_{U_1}(\tau)P_{U_2}(x-\tau)d\tau\\
+    &\text{As} P_{U_1}=1 \forall x\in (0,1) \text{and}\\
+    &P_{U_1}=0 \forall x\in (-\infty,0]\cup[1,\infty)\\
+    &\therefore P_T{x}=\int_{0}^{1}P_{}
+\end{align}
 \end{enumerate}
 \end{document}
