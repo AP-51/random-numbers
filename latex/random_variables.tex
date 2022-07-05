@@ -455,7 +455,8 @@ Use the below command to run the plot code
 \item Generate $T=U_1+U_2$
 \solution Download and run the following programs:
 \begin{lstlisting}
-    wget
+    wget https://github.com/AP-51/random-numbers/blob/main/code/coeffs.h
+    wget https://github.com/AP-51/random-numbers/blob/main/code/tri.c
 \end{lstlisting}
 Use the below command to run the program
 \begin{lstlisting}
@@ -466,9 +467,95 @@ Use the below command to run the program
 \solution We know that $P_T(x)=P(U_1+U_2=x)$
 \begin{align}
     &\implies P_T(x)=\int_{-\infty}^{\infty}P_{U_1}(\tau)P_{U_2}(x-\tau)d\tau\\
-    &\text{As} P_{U_1}=1 \forall x\in (0,1) \text{and}\\
-    &P_{U_1}=0 \forall x\in (-\infty,0]\cup[1,\infty)\\
-    &\therefore P_T{x}=\int_{0}^{1}P_{}
+    &\text{As} \;P_{U_1}=1 \; \forall \; x\in (0,1) \; \text{and}\\
+    &P_{U_1}=0 \;\forall \;x\in (-\infty,0]\cup[1,\infty)\\
+    &\therefore P_T(x)=\int_{0}^{1}P_{U_2}(x-\tau)d\tau\\
+    &\text{Now} \;\; P_{U_2}(x-\tau)=1 \; \text{for} \;0<x-\tau<1\\
+    &\implies x-1<\tau<x
 \end{align}
+If $x<1,0<\tau<x$
+\begin{align}
+    & \int_{0}^{x}1d\tau\;=x
+\end{align}
+If $x>1,x-1<\tau<1$
+\begin{align}
+    & \int_{x-1}^{1}1d\tau\;=2-x
+\end{align}
+\begin{align}
+    \therefore P_T(x)=
+    \begin{cases}
+    0, \;\; x<0\\
+    x, \;\; 0<x<1\\
+    2-x, \;\; 1<x<2\\
+    0, \;\; x>2\\
+    \end{cases}     
+\end{align}
+On Integrating $P_T(x)$ we get $F_T(x)$
+\begin{align}
+    F_T(x)=
+    \begin{cases}
+    0, \;\; x<0\\
+    x^2, \;\; 0<x<1\\
+    1-\dfrac{(2-x)^2}{2}, \;\; 1<x<2\\
+    1, \;\; x>2\\
+    \end{cases}     
+\end{align}
+\item Find the PDF of T:\\
+\solution 
+\begin{align}
+    P_T(x)=
+    \begin{cases}
+    0, \;\; x<0\\
+    x, \;\; 0<x<1\\
+    2-x, \;\; 1<x<2\\
+    0, \;\; x>2\\
+    \end{cases}     
+\end{align}
+\item Find Theoretical expressions for CDF and PDF:\\
+\solution CDF:
+\begin{align}
+    F_T(x)=
+    \begin{cases}
+    0, \;\; x<0\\
+    x^2, \;\; 0<x<1\\
+    1-\dfrac{(2-x)^2}{2}, \;\; 1<x<2\\
+    1, \;\; x>2\\
+    \end{cases}     
+\end{align}
+PDF:
+\begin{align}
+    P_T(x)=
+    \begin{cases}
+    0, \;\; x<0\\
+    x, \;\; 0<x<1\\
+    2-x, \;\; 1<x<2\\
+    0, \;\; x>2\\
+    \end{cases}     
+\end{align}
+\item Verify your results through a plot:
+\solution Use the below code to plot CDF and PDF
+\begin{lstlisting}
+    wget https://github.com/AP-51/random-numbers/blob/main/code/plots/tri_cdf_plot.py
+    wget https://github.com/AP-51/random-numbers/blob/main/code/plots/tri_pdf_plot.py
+\end{lstlisting}
+Use the following command to run the code
+\begin{lstlisting}
+    python3 tri_cdf_plot.py
+    python3 tri_pdf_plot.py
+\end{lstlisting}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\columnwidth]{./plots/tri_cdf_plot_py.png}
+    \caption{The CDF of $T=U_1+U_2$}
+    \label{fig:T_cdf}
+    \end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\columnwidth]{./plots/tri_pdf_plot_py.png}
+    \caption{The PDF of $T=U_1+U_2$}
+    \label{fig:T_pdf}
+\end{figure}
 \end{enumerate}
+
 \end{document}
