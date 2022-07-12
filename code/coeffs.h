@@ -1,5 +1,6 @@
 #include<stdlib.h>
 #include<math.h>
+#include<stdio.h>
 //Function declaration
 double **createMat(int m,int n);
 void readMat(double **p, int m,int n);
@@ -13,6 +14,7 @@ double **transpose(double **a,  int m, int n);
 void uniform(char *str, int len);
 void gaussian(char *str, int len);
 double mean(char *str);
+void y_func(char *str,double a);
 //End function declaration
 
 
@@ -205,6 +207,56 @@ fprintf(fp,"%lf\n",(double)rand()/RAND_MAX);
 fclose(fp);
 
 }
+
+void triang(char *str,int len)
+{
+	int i;
+	double x,y;
+	FILE *fp;
+	fp=fopen(str,"w");
+	for(i=0;i<len;i++)
+	{
+		x=(double)rand()/RAND_MAX;
+		y=(double)rand()/RAND_MAX;
+		fprintf(fp,"%lf\n",x+y);
+	}
+	fclose(fp);
+}
+
+void bernoulli(char *str,int len)
+{
+	int i,x,y;
+	FILE *fp;
+	fp=fopen(str,"w");
+	for(i=0;i<len;i++)
+	{
+		x=rand();
+		if(x%2==0) y=1;
+		else y=-1;
+		fprintf(fp,"%d\n",y);
+	}
+	fclose(fp);
+}
+void y_func(char *str, double a)
+{
+	FILE *f1;
+	FILE *f2;
+	FILE *f3;
+	double y,x,n;
+	f1= fopen("bern.dat","r");
+	f2= fopen("gau.dat","r");
+	f3=fopen(str,"w");
+	while((fscanf(f1,"%lf",&x)!=EOF)&&(fscanf(f2,"%lf",&n))){
+			y=a*x+n;
+			fprintf(f3,"%lf\n",y);
+			} 
+	fclose(f1);
+	fclose(f2);
+	fclose(f3);
+
+
+
+}
 //End function for generating uniform random numbers
 
 //Defining the function for calculating the mean of random numbers
@@ -237,15 +289,6 @@ double x, temp=0.0;
 
 fp=fopen(str,"r");
 double m=mean(str);
-/*while(fscanf(fp,"%lf",&x)!=EOF)
-{
-//Count numbers in file
-i=i+1;
-//Add all numbers in file
-m = m+x;
-}
-m = m/(i-1);
-i=0;*/
 while(fscanf(fp,"%lf",&x)!=EOF)
 {
   i=i+1;
@@ -279,3 +322,33 @@ fprintf(fp,"%lf\n",temp);
 fclose(fp);
 
 }
+double gau()
+{
+	double t=0;
+	for(int i=0;i<12;i++)
+	{
+		t+=(double)rand()/RAND_MAX;
+	}
+	t-=6;
+	return t;
+}
+
+void chi(char *str,int len)
+{
+	FILE* fp;
+	double chi=0;
+	double x_1;
+	double x_2;
+	fp=fopen(str,"w");
+	for(int i=0;i<len;i++)
+	{
+		x_1=gau();
+		x_2=gau();
+		chi=(x_1*x_1)+(x_2*x_2);
+		fprintf(fp,"%lf\n",chi);
+	}
+	fclose(fp);
+}
+
+
+
